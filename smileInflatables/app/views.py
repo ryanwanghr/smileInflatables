@@ -1,19 +1,21 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Product
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+
 def index(request):
-    # question = get_object_or_404(Question, pk=question_id)
-    # try:
-    #     choice = question.choice_set.get(pk = request.POST['choice'])
-    # except (Choice.DoesNotExist, KeyError):
-    #     context = {
-    #         "question": question, 
-    #         "error_message": "please select a choice"
-    #     }
-    #     return render(request, "polls/detail.html", context)
-    # else:
-    #     choice.votes = F("votes") + 1
-    #     choice.save()
-    # return HttpResponseRedirect(reverse("polls:results", args=[question.pk]))
-    return HttpResponse("hello")
+    return render(request, "app/index.html")
+
+def products(request):
+    products = Product.objects.all() 
+    context = {"products": products}
+    if "Hx-Request" in request.headers and request.headers["Hx-Request"]:
+        return render(request, "app/partials/products.html", context)
+
+    return render(request, "app/products.html", context)
 
 # Create your views here.

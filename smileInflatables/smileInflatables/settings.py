@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'tailwind',
+    'theme',
+    'django_browser_reload',
     'app.apps.AppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -48,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
 ]
 
 ROOT_URLCONF = 'smileInflatables.urls'
@@ -70,12 +75,29 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'smileInflatables.wsgi.application'
 
+# Tailwind
+TAILWIND_APP_NAME = "theme"
+
+# Ip
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 # Storage
 
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            'access_key': 'AKIAYA4TPVURN3ONYM3V',
+            'secret_key': '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',
+            'bucket_name': 'smile-inflatables-images',
+            'querystring_auth': False,
+        },
     },
+    'staticfiles': {
+        "BACKEND": 'django.contrib.staticfiles.storage.StaticFilesStorage',
+    }
 }
 
 # Database
@@ -133,3 +155,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+}

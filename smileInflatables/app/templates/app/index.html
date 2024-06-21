@@ -1,0 +1,17 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'app/styles/index.css' %}">
+{% endblock %}
+{% block main %}
+  <div class="overflow-hidden bg-[#FFCAAF] p-2">
+    <p class="scroll-text text-nowrap translate-x-[100%] text-xs font-DM font-bold">Buy inflatable toys and castles from the most trusted manufacturer in the world! Buy inflatable toys and castles from the most trusted manufacturer in the world! Buy inflatable toys and castles from the most trusted manufacturer in the world! Buy inflatable toys and castles from the most trusted manufacturer in the world! Buy inflatable toys and castles from the most trusted manufacturer in the world! Buy inflatable toys and castles from the most trusted manufacturer in the world!</p>
+  </div>
+  <div class="flex justify-center pt-5">
+    <img class="w-[80%]" src="{% static 'app/images/castle-hero.png' %}"/>
+  </div>
+    <p class="text-xl pl-8 pr-12 pt-5 font-normal font-Playfair ">Our Inflatables are crafted for Quality, Longevity, and Fun!</p>
+    <button class="inline-flex items-center justify-center whitespace-nowrap rounded-3xl text-sm font-DM font-bold ring-offset-background transition-colors duration-700 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-[#78C5F2] text-primary-foreground hover:bg-blue-100 h-10 px-8 py-1 mx-8 my-4">SHOP NOW</button>
+    <script src="{% static "app/scripts/index.js" %}"></script>
+  {% endblock %}
