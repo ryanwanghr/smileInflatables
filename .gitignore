@@ -2,3 +2,5 @@ activateEnvironment
 env/
 __pycache__
 runserver.sh
+.env*
+run-*

@@ -1,0 +1,80 @@
+{% load static %}
+<nav
+  class="flex bg-base-100 flex-row justify-between md:justify-around items-center"
+>
+  <div id="contact-info"
+    class="absolute z-30 bg-primary left-[50vh] top-[30vh] translate-x-[-50%] p-5 rounded-xl hidden"
+  >
+    <div class="flex justify-end pb-2">
+      <button>
+        <img id="contact-info-close-button"
+          class="accent-black"
+          src="{% static 'app/images/close-button.svg' %}"
+        />
+      </button>
+    </div>
+    <p>smileinflatablesinfo@gmail.com</p>
+  </div>
+  <!-- menu button -->
+  <div class="menu-icon menu-button m-5 w-[8%] z-20 md:!hidden">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+  </div>
+  <!-- end menu button -->
+  <div
+    class="nav-links absolute bg-base-100 top-0 pt-[20vw] p-5 md:p-0 md:pl-2 translate-x-[-100vw] transition-all z-10 h-full md:translate-x-[0vw] md:static"
+  >
+    <ul class="space-y-2 flex flex-col items-start md:space-y-0 md:space-x-2 md:flex-row">
+      <button>
+        <li
+          id="products-button"
+          class="font-DM font-normal text-3xl md:text-xl"
+          hx-get="{% url 'app:products' %}"
+          hx-push-url="true"
+          hx-target="#main-page"
+        >
+          Products
+        </li>
+      </button>
+      <button>
+        <li class="font-DM font-normal text-3xl md:text-xl" id="contact-button">
+          Contact
+        </li>
+      </button>
+    </ul>
+    <div
+      class="md:hidden bg-gradient-to-b from-[#EBEBEB] to-[#C6E2E9] rounded-xl mt-6 p-4"
+    >
+      <img src="{% static 'app/images/castle-hero.png' %}" />
+    </div>
+    <div class="md:hidden flex flex-row gap-2 items-center mt-2">
+      <p>New Inflatables</p>
+      <img src="{% static 'app/images/arrow-right-icon.svg' %}" />
+    </div>
+  </div>
+  <button
+      class="max-w-[30%] object-contain z-20 md:max-w-[15%] m-2"          
+          hx-get="{% url 'app:index' %}"
+          hx-push-url="true"
+          hx-target="body"
+>
+  <img
+    class="object-contain"
+    src="{% static 'app/images/smile-inflatables-logo.png' %}"
+  />
+  </button>
+  <button
+    class="z-20 flex items-center bg-accent rounded-[3em] px-5 py-3 gap-2 mx-3"
+    hx-get="{% url 'app:products' %}"
+    hx-push-url="true"
+    hx-target="#main-page"
+  >
+    <img
+      class="w-[100%] md:w-[60%] z-20"
+      src="{% static 'app/images/search-icon.svg' %}"
+    />
+    <h1 class="font-DM font-normal hidden md:block">search</h1>
+  </button>
+  <script src="{% static "app/scripts/nav.js" %}"></script>
+</nav>

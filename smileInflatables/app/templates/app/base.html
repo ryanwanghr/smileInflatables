@@ -1,42 +1,13 @@
-{% load static tailwind_tags %}
+{% load static %}
 <!doctype html>
 <html lang="en" data-theme="pastel">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    {% tailwind_css %}
+    {% include "app/partials/head.html" %}
     {% block head %}{% endblock %}
   </head>
   <body>
     <header>
-      <nav class="flex bg-base-100 flex-row justify-between items-center">
-        <!-- menu button -->
-        <div class="menu-icon menu-button m-5 w-[8%] z-20 md:!hidden">
-          <div class="bar1"></div>
-          <div class="bar2"></div>
-          <div class="bar3"></div>
-        </div>
-        <!-- end menu button -->
-        <div class="nav-links absolute bg-base-100 top-0 pt-[20vw] p-5 md:p-0 md:pl-2 translate-x-[-100vw] transition-all z-10 h-full md:translate-x-[0vw] md:static">
-          <ul class="space-y-2 md:flex md:space-y-0 md:space-x-2 flex-row ">
-            <li class="font-DM font-normal text-3xl" hx-get="{% url 'app:products' %}" hx-push-url="true" hx-target="#main-page">Products</li>
-            <li class="font-DM font-normal text-3xl">Contact</li>
-          </ul>
-          <div class="md:hidden bg-gradient-to-b from-[#EBEBEB] to-[#C6E2E9] rounded-xl mt-6 p-4">
-            <img src="{% static 'app/images/castle-hero.png' %}"/>
-          </div>
-          <div class="md:hidden flex flex-row gap-2 items-center mt-2">
-            <p>New Inflatables</p><img src="{% static 'app/images/arrow-right-icon.svg' %}"/>
-          </div>
-        </div>
-      <img class="max-w-[30%] object-contain z-20" src="{% static 'app/images/smile-inflatables-logo.png' %}"/>
-        <img class="m-5 w-[8%] z-20" src="{% static 'app/images/search-icon.svg' %}"/>
-       </nav>
+      {% include "app/partials/nav.html" %}
     </header>
     <main id="main-page" class="bg-[#C6E2E9]">
       {% block main %}{% endblock %}

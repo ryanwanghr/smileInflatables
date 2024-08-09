@@ -50,7 +50,7 @@ module.exports = {
     },
   },
   daisyui: {
-    themes: ["light", "dark", "pastel"],
+    themes: ["pastel"],
     darkTheme: "pastel",
   },
   plugins: [

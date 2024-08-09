@@ -21,17 +21,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-q9$uqy2!mee3u1h-)c2oua3%j5tg*g3o!hum86rsdblzy*rxx*'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'widget_tweaks',
     'tailwind',
     'theme',
     'django_browser_reload',
@@ -89,8 +90,8 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            'access_key': 'AKIAYA4TPVURN3ONYM3V',
-            'secret_key': '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',
+            'access_key': os.environ["STORAGE_ACCESS_KEY"],
+            'secret_key': os.environ["STORAGE_SECRET_KEY"],
             'bucket_name': 'smile-inflatables-images',
             'querystring_auth': False,
         },
@@ -107,8 +108,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'smile-inflatables',
-        'USER': 'ryanwanghr',
-        'PASSWORD': 'postgres1!2@3#',
+        'USER': os.environ["DB_USER"],
+        'PASSWORD': os.environ["DB_PASSWORD"],
         'HOST': 'localhost',
         'PORT': '5432',
     }
