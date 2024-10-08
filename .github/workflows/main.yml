@@ -1,33 +1,35 @@
-name: Continuous Integration and Delivery 
+name: Continuous Integration and Delivery
 
 on: [push]
 
-env:
-  WEB_IMAGE: ghcr.io/${{ github.repository | toLowerCase }}/web
-  NGINX_IMAGE: ghcr.io/${{ github.repository | toLowerCase }}/nginx
+# env:
+#   WEB_IMAGE: ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/web
+#   NGINX_IMAGE: ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/nginx
 
 jobs:
   build:
     name: Build Docker Images
     runs-on: ubuntu-latest
     steps:
+      - name: Set lowercase image variables
+        run: |
+          WEB_IMAGE="ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/web"
+          NGINX_IMAGE="ghcr.io/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/nginx"
+          echo "WEB_IMAGE=$WEB_IMAGE" >> $GITHUB_ENV
+          echo "NGINX_IMAGE=$NGINX_IMAGE" >> $GITHUB_ENV
       - name: Checkout master
         uses: actions/checkout@v3
       - name: Add environment variables to .env
         run: |
-          echo DEBUG=0 >> .env
-          echo SQL_ENGINE=django.db.backends.postgresql >> .env
-          echo DATABASE=postgres >> .env
-          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
-          echo DB_NAME=${{ secrets.DB_NAME }} >> .env
-          echo DB_USER=${{ secrets.DB_USER }} >> .env
-          echo SQL_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
-          echo SQL_HOST=${{ secrets.SQL_HOST }} >> .env
-          echo SQL_PORT=${{ secrets.SQL_PORT }} >> .env
-      - name: Set environment variables
-        run: |
-          echo "WEB_IMAGE=$(echo ${{env.WEB_IMAGE}} )" >> $GITHUB_ENV
-          echo "NGINX_IMAGE=$(echo ${{env.NGINX_IMAGE}} )" >> $GITHUB_ENV
+          echo DEBUG=0 >> .env.prod
+          echo SQL_ENGINE=django.db.backends.postgresql >> .env.prod
+          echo DATABASE=postgres >> .env.prod
+          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env.prod
+          echo DB_NAME=${{ secrets.DB_NAME }} >> .env.prod
+          echo DB_USER=${{ secrets.DB_USER }} >> .env.prod
+          echo SQL_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env.prod
+          echo SQL_HOST=${{ secrets.SQL_HOST }} >> .env.prod
+          echo SQL_PORT=${{ secrets.SQL_PORT }} >> .env.prod
       - name: Log in to GitHub Packages
         run: echo ${PERSONAL_ACCESS_TOKEN} | docker login ghcr.io -u ${{ secrets.NAMESPACE }} --password-stdin
         env:
