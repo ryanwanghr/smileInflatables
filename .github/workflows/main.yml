@@ -23,13 +23,13 @@ jobs:
         run: |
           echo DEBUG=0 >> .env.prod
           echo SQL_ENGINE=django.db.backends.postgresql >> .env.prod
-          echo DATABASE=postgres >> .env.prod
+          echo "DATABASE=${{ secrets.DATABASE }}"> .env.prod
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env.prod
-          echo DB_NAME=${{ secrets.DB_NAME }} >> .env.prod
-          echo DB_USER=${{ secrets.DB_USER }} >> .env.prod
-          echo SQL_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env.prod
-          echo SQL_HOST=${{ secrets.SQL_HOST }} >> .env.prod
-          echo SQL_PORT=${{ secrets.SQL_PORT }} >> .env.prod
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env.prod
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env.prod
+          echo "SQL_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env.prod
+          echo "SQL_HOST=${{ secrets.SQL_HOST }}" >> .env.prod
+          echo "SQL_PORT=${{ secrets.SQL_PORT }}" >> .env.prod
       - name: Log in to GitHub Packages
         run: echo ${PERSONAL_ACCESS_TOKEN} | docker login ghcr.io -u ${{ secrets.NAMESPACE }} --password-stdin
         env:
