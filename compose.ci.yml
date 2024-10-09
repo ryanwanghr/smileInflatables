@@ -24,6 +24,8 @@ services:
       - 80:80
     volumes:
       - static_volume:/home/smileInflatables/web/staticfiles
+    env_file:
+      - ./.env.prod
     depends_on:
       - web
 
