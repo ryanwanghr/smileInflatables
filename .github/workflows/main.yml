@@ -34,7 +34,7 @@ jobs:
           docker pull ${{ env.NGINX_IMAGE }} || true
       - name: Build images
         run: |
-          docker compose -f compose.prod.yml build
+          docker compose -f compose.ci.yml build
       - name: Push images
         run: |
           docker push ${{ env.WEB_IMAGE }}
@@ -78,12 +78,12 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          scp  -o StrictHostKeyChecking=no -r ./.env.prod ./compose.prod.yml root@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/smileInflatables
+          scp  -o StrictHostKeyChecking=no -r ./.env.prod ./compose.ci.yml root@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }}:/smileInflatables
           ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }} << 'ENDSSH'
             cd /smileInflatables
             source .env.prod
             docker login ghcr.io -u $NAMESPACE -p $PERSONAL_ACCESS_TOKEN
             docker pull $WEB_IMAGE
             docker pull $NGINX_IMAGE
-            docker compose -f compose.prod.yml up -d
+            docker compose -f compose.ci.yml up -d
           ENDSSH
