@@ -1,0 +1,32 @@
+services:
+  web:
+    image: "${WEB_IMAGE}"
+    command: gunicorn smileInflatables.wsgi:application --bind 0.0.0.0:8000
+    volumes: 
+      - static_volume:/home/smileInflatables/web/staticfiles
+    expose:
+      - 8000
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=ryanwanghr
+      - POSTGRES_PASSWORD=postgres1!2@3#
+      - POSTGRES_DB=smile-inflatables
+  nginx:
+    image: "${NGINX_IMAGE}"
+    ports:
+      - 1337:80
+    volumes:
+      - static_volume:/home/smileInflatables/web/staticfiles
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
