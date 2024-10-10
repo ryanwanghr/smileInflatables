@@ -65,10 +65,12 @@ jobs:
           echo STORAGE_ACCESS_KEY=${{ secrets.STORAGE_ACCESS_KEY }} >> .env.prod
           echo STORAGE_SECRET_KEY=${{ secrets.STORAGE_SECRET_KEY }} >> .env.prod
           echo DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }} >> .env.prod
+          echo DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}
           echo WEB_IMAGE=${{ env.WEB_IMAGE }} >> .env.prod
           echo NGINX_IMAGE=${{ env.NGINX_IMAGE }} >> .env.prod
           echo NAMESPACE=${{ secrets.NAMESPACE }} >> .env.prod
           echo PERSONAL_ACCESS_TOKEN=${{ secrets.PERSONAL_ACCESS_TOKEN }} >> .env.prod
+          cat .env.prod
       - name: Add the private SSH key to the ssh-agent
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
