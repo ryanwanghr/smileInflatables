@@ -4,3 +4,4 @@ __pycache__
 runserver.sh
 .env*
 run-*
+smileInflatables/staticfiles
