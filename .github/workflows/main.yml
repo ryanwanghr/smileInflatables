@@ -28,13 +28,9 @@ jobs:
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env.prod
       - name: Log in to GitHub Packages
         run: echo ${{ secrets.PERSONAL_ACCESS_TOKEN}} | docker login ghcr.io -u ${{ secrets.NAMESPACE }} --password-stdin
-      - name: Pull images
-        run: |
-          docker pull ${{ env.WEB_IMAGE }} || true
-          docker pull ${{ env.NGINX_IMAGE }} || true
       - name: Build images
         run: |
-          docker compose -f compose.ci.yml build
+          docker compose -f compose.prod.yml build
       - name: Push images
         run: |
           docker push ${{ env.WEB_IMAGE }}
