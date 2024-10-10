@@ -26,6 +26,8 @@ jobs:
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env.prod
           echo DB_HOST=${{ secrets.DB_HOST }} >> .env.prod
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env.prod
+          echo STORAGE_ACCESS_KEY=${{ secrets.STORAGE_ACCESS_KEY }} >> .env.prod
+          echo STORAGE_SECRET_KEY=${{ secrets.STORAGE_SECRET_KEY }} >> .env.prod
       - name: Log in to GitHub Packages
         run: echo ${{ secrets.PERSONAL_ACCESS_TOKEN}} | docker login ghcr.io -u ${{ secrets.NAMESPACE }} --password-stdin
       - name: Build images
@@ -58,6 +60,8 @@ jobs:
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env.prod
           echo DB_HOST=${{ secrets.DB_HOST }} >> .env.prod
           echo DB_PORT=${{ secrets.DB_PORT }} >> .env.prod
+          echo STORAGE_ACCESS_KEY=${{ secrets.STORAGE_ACCESS_KEY }} >> .env.prod
+          echo STORAGE_SECRET_KEY=${{ secrets.STORAGE_SECRET_KEY }} >> .env.prod
           echo WEB_IMAGE=${{ env.WEB_IMAGE }} >> .env.prod
           echo NGINX_IMAGE=${{ env.NGINX_IMAGE }} >> .env.prod
           echo NAMESPACE=${{ secrets.NAMESPACE }} >> .env.prod
