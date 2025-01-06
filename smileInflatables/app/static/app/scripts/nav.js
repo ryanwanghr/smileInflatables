@@ -1,13 +1,3 @@
-contactInfo = document.getElementById("contact-info");
-contactButton = document.getElementById("contact-button");
-contactInfoCloseButton = document.getElementById("contact-info-close-button");
-contactButton.addEventListener("click", (event) => {
-  contactInfo.classList.toggle("hidden");
-});
-contactInfoCloseButton.addEventListener("click", (event) => {
-  contactInfo.classList.toggle("hidden");
-});
-
 navLinks = document.querySelector(".nav-links");
 menuButton = document.querySelector(".menu-button");
 menuButton.addEventListener("click", (event) => {

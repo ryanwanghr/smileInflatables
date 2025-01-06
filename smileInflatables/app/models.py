@@ -22,6 +22,7 @@ class Product(models.Model):
     product_name = models.CharField(max_length=200)
     product_image = models.ImageField(max_length=300,upload_to=format_product)
     product_category = models.ManyToManyField(Category)
+    product_description = models.TextField(default="")
     
     def delete(self):
         self.product_image.delete()

@@ -20,4 +20,6 @@ def products(request):
 
     return render(request, "app/products.html", context)
 
+def help(request):
+    return render(request, "app/help.html");
 # Create your views here.

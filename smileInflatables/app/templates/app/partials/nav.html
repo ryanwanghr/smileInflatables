@@ -32,13 +32,17 @@
           class="font-DM font-normal text-3xl md:text-xl"
           hx-get="{% url 'app:products' %}"
           hx-push-url="true"
-          hx-target="#main-page"
+          hx-target="body"
         >
           Products
         </li>
       </button>
       <button>
-        <li class="font-DM font-normal text-3xl md:text-xl" id="contact-button">
+        <li class="font-DM font-normal text-3xl md:text-xl"
+          hx-get="{% url 'app:help' %}"
+          hx-push-url="true"
+          hx-target="body"
+        >
           Contact
         </li>
       </button>
